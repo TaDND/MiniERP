@@ -1,34 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MiniERP.Core
+﻿namespace MiniERP.Core
 {
-    public abstract class StockItem
+    public class StockItem : StockItemBase
     {
-        private int _stockItemId;
 
-        public int StockItemId
+        public override string ToString()
         {
-            get { return _stockItemId; }
-            set {
-                if (value <= 0)
-                    value = 1;
-                _stockItemId = value; }
+            return "Item #" + this.StockItemId;
         }
+        //public override void Save()
+        //{
+        //    string json = Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        //    System.IO.File.WriteAllText(@"C:\temp\" + this.StockItemId + ".json", json);
 
-        //public int StockItemId { get; set; }
-        public string Name { get; set; }
-        public double Price { get; set; }
 
-        public StockItem()
+
+        //}
+        public static StockItem Load (int id)
         {
-            this.Name = "";
+            string json = System.IO.File.ReadAllText(@"C:\temp\" + id + ".json");
+
+            StockItem i = Newtonsoft.Json.JsonConvert.DeserializeObject(json,typeof(StockItem)) as StockItem;
+            return i;
         }
-
-        public abstract void Save();
-
     }
 }

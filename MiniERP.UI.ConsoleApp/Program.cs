@@ -11,18 +11,26 @@ namespace MiniERP.UI.ConsoleApp
         static void Main(string[] args)
         {
 
-            MiniERP.Core.Item i = new Core.Item();
+            MiniERP.Core.StockItem i = new Core.StockItem();
             i.StockItemId = 1;
             i.Name = "My Item";
             i.Price = 10;
+            i.SKU = 100;
 
             Console.WriteLine(i);
 
             i.Save();
 
 
-            MiniERP.Core.Item i2 = MiniERP.Core.Item.Load(1);
+            MiniERP.Core.StockItem i2 = MiniERP.Core.StockItem.Load(1);
 
+
+            //MiniERP.Core.Warehouse w = new Core.Warehouse();
+            //w.Add(i);
+            //w.Add(new Core.StockItem { StockItemId = 2, Name = "My Item 2", Price = 50, SKU = 20 });
+            //w.Save();
+
+            MiniERP.Core.Warehouse w2 = MiniERP.Core.Warehouse.Load();
         }
     }
 }
